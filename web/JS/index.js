@@ -11,7 +11,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     }).addTo(mymap);
 
 function getBorder(code) {
-    var json = $.getJSON("countries/countries_small.geo.json");
+    var json = $.getJSON("../countries/countries_small.geo.json");
     console.log(json);
 
     
@@ -126,7 +126,7 @@ getExchange = (results) => {
 
 getWeather = (data) => {
     $.ajax({
-        url: "PHP/getWeather.php",
+        url: "../PHP/getWeather.php",
         type: 'POST',
         dataType: 'json',
         data: {
