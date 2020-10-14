@@ -126,7 +126,7 @@ getExchange = (results) => {
 
 getWeather = (data) => {
     $.ajax({
-        url: "php/getWeather.php",
+        url: "PHP/getWeather.php",
         type: 'POST',
         dataType: 'json',
         data: {
