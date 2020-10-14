@@ -4,7 +4,7 @@ header {
 .loader {
     opacity:1;
     background-color:white;
-    position:fixed;
+    position: fixed;
     width:100%;
     height:100%;
     top:0px;
@@ -12,13 +12,22 @@ header {
     z-index:1000;
 }
 
+#sel1 {
+    position: relative;
+    right: 10px;
+    top: 20%;
+    width: 100%;
+    height: 50% ;
+}
+
+
 
 #logo {
-    position: absolute;
-    top: 15px;
-    left: 10px;
+    position: relative;
+    top: 5%;
+    left: 2px;
     display: inline-block;
-    height: 70px;
+    height: 70%;
 
 }
 
@@ -30,9 +39,10 @@ i.fas {
 h1 {
     display: inline-block;
     
-    position: absolute;
-    top: 10px;
-    left: 100px;
+    position: relative;
+    top: 20%;
+    left: 17px;
+    font-size: 3.5em;
 }
 
 #map {
@@ -63,7 +73,10 @@ form > div {
 }
 
 .form-group {
+    margin: 0px;
+    position: relative;
     width: 50vw;
+    height: 100%;
     float: right;
 }
 
@@ -73,14 +86,17 @@ form > div {
     }
 
     h1 {
-        font-size: 3em;
+        font-size: 2.5em;
     }
+
+   
     .btn {
         width: 33vw !important;
         display: inline-block;
         margin: 0px;
         height: 100%;
         font-size: 1.5em;
+        box-sizing: border-box;
     }
 
    
