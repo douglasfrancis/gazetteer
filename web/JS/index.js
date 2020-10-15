@@ -10,7 +10,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 		zoomOffset: -1
     }).addTo(mymap);
 
-function getBorder(code) {
+/*function getBorder(code) {
     var json = $.getJSON("../countries/countries_small.geo.json");
     console.log(json);
 
@@ -30,6 +30,7 @@ function getBorder(code) {
         style: myStyle
     }).addTo(mymap);
 };
+*/
 function getLocation() {
         
    if (navigator.geolocation)
@@ -66,7 +67,7 @@ $("select").on("change", function(){
 
 getCountry = (choice) => {
     $.get(`https://restcountries.eu/rest/v2/name/${choice}`, function(data){
-        console.log(data);
+        
         var results = data[0].languages;
         var languages = []
         results.forEach(element => {
@@ -85,14 +86,19 @@ getCountry = (choice) => {
             Region: ${data[0].region} <br>
             Language(s): ${languages.toString()} <br>
             Population: ${data[0].population} <br>
-            Timezone(s): ${data[0].timezones.toString()} 
+            Timezone(s): ${data[0].timezones.toString()}<br><br>
+            <img src=${data[0].flag} id='flag'>
             `);
+        $('#flag').css('width', '100%');
+            
+            
         $('#currencyInfo').html(
             `Currencies: ${currencies.toString()}`
         )
         getWeather(data);
         getExchange(data);
-        getBorder(data[0].alpha3Code);
+        console.log(data);
+        //getBorder(data[0].alpha3Code);
 
     });
 };
