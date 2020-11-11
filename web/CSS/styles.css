@@ -1,31 +1,43 @@
 header {
     height: 10vh;
+    overflow-y: scroll;
 }
-.loader {
+#loader {
     opacity:1;
     background-color:white;
-    position: fixed;
-    width:100%;
-    height:100%;
+    position: absolute;
+    width:100vw;
+    height:100vh;
     top:0px;
     left:0px;
     z-index:1000;
+    display: block;
 }
 
 #sel1 {
-    position: relative;
-    right: 10px;
-    top: 20%;
+    position: absolute;
+    right: 3px;
+    top: 3px;
     width: 100%;
-    height: 50% ;
+    height: 70% ;
+    font-size: 3.5vw;
+}
+
+div.form-group {
+    position: absolute;
+    top: 1%;
+    right: 1%;
+    height: 10vh;
+    width: 45%;
+    margin: 0px;
 }
 
 
 
 #logo {
     position: relative;
-    top: 5%;
-    left: 2px;
+    top: 15%;
+    left: -10px;
     display: inline-block;
     height: 70%;
 
@@ -39,10 +51,10 @@ i.fas {
 h1 {
     display: inline-block;
     
-    position: relative;
-    top: 20%;
-    left: 17px;
-    font-size: 3.5em;
+    position: absolute;
+    top: 3vh;
+    left: 17vw;
+    font-size: 7vw;
 }
 
 #map {
@@ -61,25 +73,21 @@ form > div {
 }
 
 .btn {
+    box-sizing: border-box;
     display: block;
     width: 100vw;
-    height: 33%;
+    height: 33.3%;
     border-radius: 0px;
     border: none;
+    padding: 0px;
 }
 
 #infoSection {
+    
     height: 30vh;
+    width: 100vw;
+    box-sizing: border-box;
 }
-
-.form-group {
-    margin: 0px;
-    position: relative;
-    width: 50vw;
-    height: 100%;
-    float: right;
-}
-
 
 
 @media only screen and (orientation: landscape){
@@ -89,17 +97,46 @@ form > div {
 
     h1 {
         font-size: 2.5em;
+        left: 10%;
+        top: 1%;
     }
 
-   
+    #infoSection {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        height: 30vh;
+        width: 100vw;
+        box-sizing: border-box;
+    }
+    
     .btn {
-        width: 33vw !important;
+        width: 33.33vw !important;
         display: inline-block;
         margin: 0px;
         height: 100%;
         font-size: 1.5em;
         box-sizing: border-box;
+        overflow: hidden;
+        
+        
     }
+    #sel1 {
+        position: absolute;
+        right: 3px;
+        top: 10px;
+        width: 100%;
+        height: 55% ;
+        font-size: 1.5vw;
+    }
+    #logo {
+        position: absolute;
+        top: 5px;
+        left: 2%;
+        display: inline-block;
+        height: 8%;
+    
+    }
+    
 
    
 }

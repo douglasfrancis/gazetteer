@@ -1,5 +1,6 @@
 var mymap = L.map('map').setView([51.504, -0.09], 13);
 
+
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZG91Z2xhc2ZyYW5jaXMiLCJhIjoiY2tmdjVtbnU1MTEybDJ5czhubjQ4bjY3aiJ9.99eYeX8Ya2HYJofFZqijbQ', {
 		maxZoom: 5,
 		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
@@ -10,27 +11,52 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 		zoomOffset: -1
     }).addTo(mymap);
 
-/*function getBorder(code) {
-    var json = $.getJSON("../countries/countries_small.geo.json");
-    console.log(json);
+function getBorder(alphaCode) {
 
-    
+    $.ajax({
+        url:"../countries/countries_small.json",
+        dataType: "json",
+        success: function(result) {
+            var countryList = result.features;
+            var coordinates = countryList.filter(country => country.id == alphaCode);
+            var refined = coordinates[0].geometry.coordinates;
+            var i;
+            if(refined.length < 2) {
+                refined.forEach(coord => polygon(coord))
+            } else {
+                for (i = 0; i < refined.length; i++) {
+                    refined[i].forEach(coord => polygon(coord));
+                  }
+            }
+        },
+        error: function() {
+           alert("Unfortunately we don't have the boundaries but please still see the country info in the boxes below")
+        }
+       })
+};
+
+var borders;
+function polygon(coordinate) {
+  
     var myLines = [{
         "type": "LineString",
-        "coordinates": [[-100, 40], [-105, 45], [-110, 55]]
+        "coordinates": coordinate
     }];
     
     var myStyle = {
         "color": "#ff7800",
-        "weight": 5,
+        "weight": 2,
         "opacity": 0.65
     };
     
-    L.geoJSON(myLines, {
+    borders = L.geoJSON(myLines, {
         style: myStyle
-    }).addTo(mymap);
+    }).addTo(mymap); 
+
+    mymap.fitBounds(borders.getBounds());
+    
 };
-*/
+
 function getLocation() {
         
    if (navigator.geolocation)
@@ -43,6 +69,7 @@ function getLocation() {
 
    function showPosition(position)
    {
+      
     mymap.setView([position.coords.latitude, position.coords.longitude], 5);
 
     L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap);
@@ -50,17 +77,21 @@ function getLocation() {
     .setLatLng([position.coords.latitude, position.coords.longitude])
     .setContent('<p>You are here!</p>')
     .openOn(mymap);
+
+    getCountry('United Kingdom');
    }
 
 
 $("select").on("change", function(){
+    
     var choice = $('#sel1').val();
     if(choice == '--Select Country--') {
         alert('Please choose a country')
     } else {
+        
         getCountry(choice);
-
-    
+        borders.removeFrom(mymap);
+        
     }
 });    
 
@@ -69,7 +100,7 @@ getCountry = (choice) => {
     $.get(`https://restcountries.eu/rest/v2/name/${choice}`, function(data){
         
         var results = data[0].languages;
-        var languages = []
+       var languages = []
         results.forEach(element => {
             languages.push(element.name);
         })
@@ -95,10 +126,10 @@ getCountry = (choice) => {
         $('#currencyInfo').html(
             `Currencies: ${currencies.toString()}`
         )
+        
         getWeather(data);
         getExchange(data);
-        console.log(data);
-        //getBorder(data[0].alpha3Code);
+        getBorder(data[0].alpha3Code);
 
     });
 };
@@ -107,7 +138,6 @@ getExchange = (results) => {
     let capital = results[0].capital;
     
     $.get(`https://restcountries.eu/rest/v2/capital/${capital}`, function(data) {
-    console.log(data[0].currencies[0].code);
     code = data[0].currencies[0].code;
     insertCode(code);
     });
