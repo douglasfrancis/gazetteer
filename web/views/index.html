@@ -4,7 +4,7 @@
         <title>Gazetteer | Geographical Index</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" href="../images/logo.png">
+        <link rel="icon" href="../images/fav.png">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">    
         <link rel="stylesheet" href="../CSS/styles.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
@@ -17,6 +17,8 @@
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
    crossorigin=""></script>
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+<script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
    
     </head>
 
@@ -29,22 +31,19 @@
 
             <div class="form-group">
               <select class="form-control" id="sel1">
-                <option>--Select Country--</option>
+                <option>-- Select Country--</option>
               </select>
             </div>
         </header>
-
+       
         <section id="map">
-
+          
         </section>
-
         <section id="infoSection">
-            <button style="background-color: #658396;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                Country Info
-              </button>
+            
               
               <!-- The Modal -->
-              <div class="modal" id="myModal">
+              <div class="modal" id="infoModal">
                 <div class="modal-dialog">
                   <div class="modal-content">
               
@@ -69,12 +68,10 @@
                 </div>
               </div>
 
-              <button style="background-color: #96b4c5;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1">
-                Currency Info
-              </button>
+             
               
               <!-- The Modal -->
-              <div class="modal" id="myModal1">
+              <div class="modal" id="currencyModal">
                 <div class="modal-dialog">
                   <div class="modal-content">
               
@@ -101,12 +98,10 @@
                 </div>
               </div>
 
-              <button style="background-color: #9cc7df;" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">
-                Weather Info
-              </button>
+            
               
               <!-- The Modal -->
-              <div class="modal" id="myModal2">
+              <div class="modal" id="weatherModal">
                 <div class="modal-dialog">
                   <div class="modal-content">
               
@@ -121,6 +116,32 @@
                       <h5 id="weatherDesc"></h5><br>
                       <h5 id="weatherTemp"></h5>
                       <img id="weatherImg" src=""><br>
+                      
+                    </div>
+              
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+              
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal" id="coronaModal">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+              
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                      <h4 class="modal-title">Coronavirus</h4>
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+              
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                      <div class="flourish-embed flourish-chart" data-src="story/230110"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
+
                       
                     </div>
               

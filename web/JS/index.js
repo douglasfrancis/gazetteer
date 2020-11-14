@@ -1,8 +1,19 @@
-var mymap = L.map('map').setView([51.504, -0.09], 13);
+var mymap = L.map('map').setView([51.504, -0.09], 5);
+/*windyInit( options, windyAPI => {
+    // windyAPI is ready, and contain 'map', 'store',
+    // 'picker' and other usefull stuff
 
+    const { map } = windyAPI;
+    // .map is instance of Leaflet map
+
+    L.popup()
+        .setLatLng([50.4, 14.3])
+        .setContent('Hello World')
+        .openOn(map);
+});*/
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZG91Z2xhc2ZyYW5jaXMiLCJhIjoiY2tmdjVtbnU1MTEybDJ5czhubjQ4bjY3aiJ9.99eYeX8Ya2HYJofFZqijbQ', {
-		maxZoom: 5,
+		maxZoom: 18,
 		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
 			'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
 			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -10,6 +21,24 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 		tileSize: 512,
 		zoomOffset: -1
     }).addTo(mymap);
+    
+L.easyButton("fas fa-info-circle", function() {
+$('#infoModal').modal('show');
+}, "Country Info").addTo(mymap);
+
+L.easyButton("fas fa-cloud-showers-heavy", function() {
+
+    $('#weatherModal').modal('show');
+    }, "Weather").addTo(mymap);
+
+L.easyButton("fas fa-coins", function() {
+    $('#currencyModal').modal('show');
+        }, "Currency").addTo(mymap);
+
+L.easyButton("fas fa-virus", function() {
+    $('#coronaModal').modal('show');
+        }, "Coronavirus Stats").addTo(mymap);
+        
 
 function getBorder(alphaCode) {
 
@@ -77,10 +106,8 @@ function getLocation() {
     .setLatLng([position.coords.latitude, position.coords.longitude])
     .setContent('<p>You are here!</p>')
     .openOn(mymap);
-
     getCountry('United Kingdom');
    }
-
 
 $("select").on("change", function(){
     
@@ -90,15 +117,15 @@ $("select").on("change", function(){
     } else {
         
         getCountry(choice);
-        borders.removeFrom(mymap);
-        
+        borders.removeFrom(mymap); 
     }
 });    
 
+var capital;
 
 getCountry = (choice) => {
     $.get(`https://restcountries.eu/rest/v2/name/${choice}`, function(data){
-        
+        console.log(data)
         var results = data[0].languages;
        var languages = []
         results.forEach(element => {
@@ -126,7 +153,12 @@ getCountry = (choice) => {
         $('#currencyInfo').html(
             `Currencies: ${currencies.toString()}`
         )
-        
+        capital = L.marker([data[0].latlng[0], data[0].latlng[1]]).addTo(mymap);
+        L.popup()
+        .setLatLng([data[0].latlng[0], data[0].latlng[1]])
+        .setContent(data[0].capital)
+        .openOn(mymap);
+
         getWeather(data);
         getExchange(data);
         getBorder(data[0].alpha3Code);
@@ -150,15 +182,10 @@ getExchange = (results) => {
             if(key == code){
             $('#exchange').html(`Exchange Rate: ${rates[key]} ${code} to 1 USD`);
         }
-          
-          });
-
-       
+        });
     });
 }
-
 };
-
 
 getWeather = (data) => {
     $.ajax({
@@ -171,7 +198,6 @@ getWeather = (data) => {
         },
         success: function(result) {
         
-                  
                  let weatherCode = result.data.weather[0].icon;
                  let weatherDescription = result.data.weather[0].description;
                  let weatherTemp = result.data.temp;
@@ -179,13 +205,10 @@ getWeather = (data) => {
                  document.getElementById('weatherImg').src = `http://openweathermap.org/img/wn/${weatherCode}@2x.png`;
                  document.getElementById('weatherDesc').innerHTML = `Current Weather: ${weatherDescription}`;
                  document.getElementById('weatherTemp').innerHTML = `Current Temperature: ${Math.round(weatherTemp - 273.15)}°C`;
-                 
-
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(jqXHR, textStatus, errorThrown);
         }
-    
     });
 }
 countryList = () => {
