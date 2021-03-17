@@ -1,0 +1,130 @@
+[
+    {
+        "number" : 1,
+        "name": "Mount Everest",
+    "coordinates": {
+        "lat": 27.9881,
+        "long": 86.9250
+    },
+    "elevation": 8849,
+    "firstAscent": "29th May 1953",
+    "countries": ["China", "Nepal"],
+    "wiki": "https://en.wikipedia.org/wiki/Mount_Everest"
+},
+
+{
+    "number" : 2,
+    "name": "K2",
+"coordinates": {
+    "lat": 35.8800,
+    "long": 76.5151
+},
+"elevation": 8611,
+"firstAscent": "31st July 1954",
+"countries": ["China", "Pakistan"],
+"wiki": "https://en.wikipedia.org/wiki/K2"
+},
+{
+    "number" : 3,
+    "name": "Kangchenjunga",
+"coordinates": {
+    "lat": 27.7025,
+    "long": 88.1475
+},
+"elevation": 8586,
+"firstAscent": "25th May 1955",
+"countries": ["India", "Nepal"],
+"wiki": "https://en.wikipedia.org/wiki/Kangchenjunga"
+},
+
+{
+    "number" : 4,
+    "name": "Lhotse",
+"coordinates": {
+    "lat": 27.9626,
+    "long": 86.9336
+},
+"elevation": 8516,
+"firstAscent": "18th May 1956",
+"countries": ["China", "Nepal"],
+"wiki": "https://en.wikipedia.org/wiki/Lhotse"
+},
+
+{
+    "number" : 5,
+    "name": "Makalu",
+"coordinates": {
+    "lat": 27.8857,
+    "long": 87.0876
+},
+"elevation": 8481,
+"firstAscent": "15th May 1955",
+"countries": ["Nepal"],
+"wiki": "https://en.wikipedia.org/wiki/Makalu"
+},
+
+{
+    "number" : 6,
+    "name": "Cho Oyu",
+"coordinates": {
+    "lat": 28.0960,
+    "long": 86.6615
+},
+"elevation": 8188,
+"firstAscent": "19th Oct 1954",
+"countries": ["China", "Nepal"],
+"wiki": "https://en.wikipedia.org/wiki/Cho_Oyu"
+},
+
+{
+    "number" : 7,
+    "name": "Dhaulagiri",
+"coordinates": {
+    "lat": 28.69776727,
+    "long": 83.49098327
+},
+"elevation": 8167,
+"firstAscent": "13th May 1960",
+"countries": ["Nepal"],
+"wiki": "https://en.wikipedia.org/wiki/Dhaulagiri"
+},
+
+{
+    "number" : 8,
+    "name": "Manaslu",
+"coordinates": {
+    "lat": 28.5497,
+    "long": 84.5597
+},
+"elevation": 8156,
+"firstAscent": "09th May 1956",
+"countries": ["Nepal"],
+"wiki": "https://en.wikipedia.org/wiki/Manaslu"
+},
+
+{
+    "number" : 9,
+    "name": "Nanga Parbat",
+"coordinates": {
+    "lat": 35.2375,
+    "long": 74.5891
+},
+"elevation": 8126,
+"firstAscent": "03rd July 1953",
+"countries": ["Pakistan"],
+"wiki": "https://en.wikipedia.org/wiki/Nanga_Parbat"
+},
+
+{
+    "number" : 10,
+    "name": "Annapurna",
+"coordinates": {
+    "lat": 28.6136,
+    "long": 83.8736
+},
+"elevation": 8091,
+"firstAscent": "03rd June May 1950",
+"countries": ["Nepal"],
+"wiki": "https://en.wikipedia.org/wiki/Annapurna_Massif"
+}
+]
