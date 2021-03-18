@@ -3,9 +3,9 @@ var mymap = L.map('map').setView([51.504, -0.09], 5);
 
 L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZG91Z2xhc2ZyYW5jaXMiLCJhIjoiY2tmdjVtbnU1MTEybDJ5czhubjQ4bjY3aiJ9.99eYeX8Ya2HYJofFZqijbQ", {
 		maxZoom: 18,
-		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
-			'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+		attribution: `<div id="map-attr">Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, 
+			'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, 
+			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a></div>`,
 		id: 'mapbox/streets-v11',
 		tileSize: 512,
 		zoomOffset: -1
@@ -64,7 +64,7 @@ countryList = () => {
         url: "../PHP/getCountries.php",
         type: 'GET',
         success: function(result) {
-        console.log(result);
+      
         result.data.forEach(element => {
             let name = document.createElement("option");
             name.innerHTML = element.name;
@@ -92,7 +92,7 @@ $("select").on("change", function(){
 getBorder = (alphaCode) => {
 
     $.ajax({
-        url:"../countries/countries_small.json",
+        url:"../PHP/getBoundaries.php",
         dataType: "json",
         success: function(result) {
             var countryList = result.features;
@@ -155,20 +155,16 @@ getCountry = (choice) => {
         mymap.setView([data[0].latlng[0], data[0].latlng[1]], 5);
           
         $('#countryName').html(choice);
-        $('#countryInfo').html(
-           `Capital: ${data[0].capital} <br>
-            Region: ${data[0].region} <br>
-            Language(s): ${languages.toString()} <br>
-            Population: ${data[0].population} <br>
-            Timezone(s): ${data[0].timezones.toString()}<br><br>
-            <img src=${data[0].flag} id='flag'>
-            `);
-        $('#flag').css('width', '100%');
+        $('#capital').html(data[0].capital);
+        $('#region').html(data[0].region);
+        $('#language').html(languages.toString());
+        $('#population').html(data[0].population);
+        $('#timezone').html(data[0].timezones);
+        $('#country-flag').attr("src", data[0].flag);
             
-            
-        $('#currencyInfo').html(
-            `Currencies: ${currencies.toString()}`
-        )
+        $('#country-flag').css('width', '100%');
+               
+        $('#currencyInfo').html(currencies.toString());
 
         getWeather(data);
         getExchange(data);
@@ -191,7 +187,7 @@ getExchange = (results) => {
         let rates = data.rates;
         Object.keys(rates).forEach(function(key) {
             if(key == code){
-            $('#exchange').html(`Exchange Rate: ${rates[key]} ${code} to 1 USD`);
+            $('#exchange').html(`${rates[key]} ${code} to 1 USD`);
         }
         });
     });
@@ -208,14 +204,14 @@ getWeather = (data) => {
             lon: data[0].latlng[1]
         },
         success: function(result) {
-        console.log(result)
+        
                  let weatherCode = result.data.weather[0].icon;
                  let weatherDescription = result.data.weather[0].description;
                  let weatherTemp = result.data.temp;
 
                  document.getElementById('weatherImg').src = `http://openweathermap.org/img/wn/${weatherCode}@2x.png`;
-                 document.getElementById('weatherDesc').innerHTML = `Current Weather: ${weatherDescription}`;
-                 document.getElementById('weatherTemp').innerHTML = `Current Temperature: ${Math.round(weatherTemp - 273.15)}°C`;
+                 document.getElementById('weatherDesc').innerHTML = weatherDescription;
+                 document.getElementById('weatherTemp').innerHTML = `${Math.round(weatherTemp - 273.15)}°C`;
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(jqXHR, textStatus, errorThrown);
@@ -235,9 +231,10 @@ getMountains = () => {
 
     if($("#list").html("")){
     $.ajax({
-        url:"../countries/mountains.json",
+        url:"https://douglasfrancis.github.io/data/mountains.json",
         dataType: "json",
         success: function(result) {
+            
            
             result.forEach(mountain => { 
                 $("#list").append(`<p id="m${mountain.number}">${mountain.number}. ${mountain.name}</p> `);

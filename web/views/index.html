@@ -55,15 +55,37 @@
               
                     <!-- Modal body -->
                     <div class="modal-body" id="countryInfo">
-                      
-                      
+                      <table class="table">                       
+                        <tbody>
+                          <tr>
+                            <th scope="row">Capital</th>
+                            <td id="capital"></td>                          
+                          </tr>
+                          <tr>
+                            <th scope="row">Region</th>
+                            <td id="region"></td>                           
+                          </tr>
+                          <tr>
+                            <th scope="row">Language(s)</th>
+                            <td id="language"></td>                           
+                          </tr>
+                          <tr>
+                            <th scope="row">Population</th>
+                            <td id="population"></td>                           
+                          </tr>
+                          <tr>
+                            <th scope="row">Timezone(s)</th>
+                            <td id="timezone"></td>                            
+                          </tr>
+                        </tbody>
+                      </table>
+                      <img id="country-flag" />
                     </div>
               
                     <!-- Modal footer -->
                     <div class="modal-footer">
                       <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    </div>
-              
+                    </div>             
                   </div>
                 </div>
               </div>
@@ -82,24 +104,30 @@
                     </div>
               
                     <!-- Modal body -->
-                    <div class="modal-body" >
-                      <h5 id="currencyInfo"></h5>
-                      <br>
-                      <h5 id="exchange"></h5>
-                      
+                    <div id="currency-body" class="modal-body" >
+                      <table class="table">
+                        <tbody>
+                          <tr>
+                            <th scope="row">Currencies</th>
+                            <td id="currencyInfo"></td>
+                          </tr>
+                          <tr>
+                            <th scope="row">Exchange Rate</th>
+                            <td id="exchange"></td>                            
+                          </tr>
+                        </tbody>
+                      </table>
                     </div>
               
                     <!-- Modal footer -->
                     <div class="modal-footer">
                       <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    </div>
-              
+                    </div>             
                   </div>
                 </div>
               </div>
 
             
-              
               <!-- The Modal -->
               <div class="modal" id="weatherModal">
                 <div class="modal-dialog">
@@ -112,9 +140,20 @@
                     </div>
               
                     <!-- Modal body -->
-                    <div class="modal-body">
-                      <h5 id="weatherDesc"></h5><br>
-                      <h5 id="weatherTemp"></h5>
+                    <div id="weather-body" class="modal-body">
+                      <table class="table">                       
+                        <tbody>
+                          <tr>
+                            <th scope="row">Current Weather</th>
+                            <td id="weatherDesc"></td>                          
+                          </tr>
+                          <tr>
+                            <th scope="row">Current Temperature</th>
+                            <td id="weatherTemp"></td>                            
+                          </tr>                        
+                        </tbody>
+                      </table>
+
                       <img id="weatherImg" src=""><br>
                       
                     </div>
@@ -122,8 +161,7 @@
                     <!-- Modal footer -->
                     <div class="modal-footer">
                       <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    </div>
-              
+                    </div>             
                   </div>
                 </div>
               </div>
@@ -140,16 +178,13 @@
               
                     <!-- Modal body -->
                     <div class="modal-body">
-                      <div class="flourish-embed flourish-chart" data-src="story/230110"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
-
-                      
+                      <div class="flourish-embed flourish-chart" data-src="story/230110"><script src="https://public.flourish.studio/resources/embed.js"></script></div>                     
                     </div>
               
                     <!-- Modal footer -->
                     <div class="modal-footer">
                       <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    </div>
-              
+                    </div>             
                   </div>
                 </div>
               </div>
@@ -166,17 +201,14 @@
               
                     <!-- Modal body -->
                     <div class="modal-body">
-                      <div id="list">
-                        
-                      </div>
-                    
+                      <div id="list">                       
+                      </div>                   
                     </div>
               
                     <!-- Modal footer -->
                     <div class="modal-footer">
                       <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    </div>
-              
+                    </div>             
                   </div>
                 </div>
               </div>
