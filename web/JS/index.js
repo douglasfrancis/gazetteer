@@ -190,7 +190,7 @@ getExchange = (results) => {
 };
 
 getWeather = (data) => {
-
+    $("#weather-table").html("")
     $.ajax({
         url: "../PHP/getWeather.php",
         type: 'POST',
