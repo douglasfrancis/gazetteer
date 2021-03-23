@@ -5,7 +5,7 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 		maxZoom: 18,
 		attribution: `<div id="map-attr">Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, 
 			'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, 
-			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a></div>`,
+			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>`,
 		id: 'mapbox/streets-v11',
 		tileSize: 512,
 		zoomOffset: -1
@@ -49,11 +49,6 @@ showPosition = (position) => {
                
              mymap.setView([position.coords.latitude, position.coords.longitude], 5);
          
-             L.marker([position.coords.latitude, position.coords.longitude]).addTo(mymap);
-             L.popup()
-             .setLatLng([position.coords.latitude, position.coords.longitude])
-             .setContent('<p>You are here!</p>')
-             .openOn(mymap);
              getCountry('United Kingdom');
             };
         
@@ -158,7 +153,7 @@ getCountry = (choice) => {
         $('#capital').html(data[0].capital);
         $('#region').html(data[0].region);
         $('#language').html(languages.toString());
-        $('#population').html(data[0].population);
+        $('#population').html(`${(data[0].population/1000000).toFixed(2)}m`);
         $('#timezone').html(data[0].timezones);
         $('#country-flag').attr("src", data[0].flag);
             
@@ -219,15 +214,16 @@ getWeather = (data) => {
     });
 }
 
-// Get highest peak data from local JSON file
+// Get highest peak data from GitHub Pages
 getMountains = () => {
-    var mountainIcon = L.icon({
-        iconUrl: '../images/mountain.png',
-        iconSize:     [50, 40], // size of the icon
-        iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-        shadowAnchor: [4, 62],  // the same for the shadow
-        popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-    });
+    
+
+    var mountainMarker = L.ExtraMarkers.icon({
+        icon: 'fa-mountain',
+        markerColor: 'orange',
+        shape: 'circle',
+        prefix: 'fas'
+      });
 
     if($("#list").html("")){
     $.ajax({
@@ -246,13 +242,28 @@ getMountains = () => {
                     mymap.setView([mountain.coordinates.lat, mountain.coordinates.long], 12);
                 });
 
-               L.marker([mountain.coordinates.lat, mountain.coordinates.long], {icon: mountainIcon})
+            
+               L.marker([mountain.coordinates.lat, mountain.coordinates.long], {icon: mountainMarker})
                .addTo(mymap)
                .bindPopup(
-                `Name: ${mountain.name}<br/>
-                Elevation: ${mountain.elevation}m<br/>
-                First Ascent: ${mountain.firstAscent}<br/>
-                <a href="${mountain.wiki}" target="_blank">Find Out More</a>
+                `<table class="table">                       
+                <tbody>
+                  <tr>
+                    <th scope="row">Name</th>
+                    <td >${mountain.name}</td>                          
+                  </tr>
+                  <tr>
+                    <th scope="row">Elevation</th>
+                    <td >${mountain.elevation}m</td>                           
+                  </tr>
+                  <tr>
+                    <th scope="row">First Ascent</th>
+                    <td >${mountain.firstAscent}</td>                           
+                  </tr>
+                </tbody>
+              </table>
+                
+                <a id="wiki-link" href="${mountain.wiki}" target="_blank">Find Out More</a>
                 `);
             })
             
@@ -267,5 +278,11 @@ getMountains = () => {
     }
 };
 
-
+/*var mountainIcon = L.icon({
+    iconUrl: '../images/mountain.png',
+    iconSize:     [50, 40], // size of the icon
+    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+    shadowAnchor: [4, 62],  // the same for the shadow
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});*/
 

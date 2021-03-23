@@ -3,10 +3,20 @@ header {
     z-index: 1000;
     position: absolute;
     top: 0px;
-    
     background-color: rgba(0, 0, 0, 0.4);
 }
 
+header.container-fluid{
+    padding: 0;
+}
+
+td{
+    text-align: right;
+}
+
+th{
+    text-align: left;
+}
 
 .leaflet-control-container { 
     position: fixed; 
@@ -15,38 +25,50 @@ header {
 
 } 
 
+#countryName{
+    padding-top: 0.5rem;
+}
+#country-flag{
+  
+    width: 100px !important;
+    padding-left: 1rem;
+}
+
 html {
     background-color: rgba(0, 0, 0, 0.4);
 }
 
 #map-attr{
-    
+    height: 1.5rem;
     z-index: 999;
     position: fixed;
-    left: 2vw;
-    top: 96vh;
-  
+    left: 0;
+    padding: 0.25rem 0 0 10px;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.4);
     width: 100vw;
+    color: white;
 
+}
+
+#map-attr a {
+    color: #ff7800 !important;
 }
 
 #sel1 {
     position: absolute;
-    right: 3px;
-    top: 3px;
-    width: 80%;
-    height: 60% ;
-    font-size: 16px;
+    right: 0px;
+    top: 0.5rem;
+    font-size: 14px;
+    width: 100%;
     
 }
 
-
-
 div.form-group {
     position: absolute;
-    top: 1%;
+    top: 0.5rem;
     right: 1%;
-    height: 10vh;
+    height: 7vh;
     width: 40%;
     margin: 0px;
 }
@@ -56,11 +78,12 @@ div.form-group {
 }
 
 #logo {
-    position: relative;
-    top: 15%;
-    left: -10px;
+    position: fixed;
+    top: 5px;
+    left: 10px;
     display: inline-block;
-    height: 70%;
+    height: 50px;
+    
 
 }
 
@@ -73,8 +96,8 @@ h1 {
     display: inline-block;
     color: white;
     position: absolute;
-    top: 3vh;
-    left: 17vw;
+    top: 2vh;
+    left: 20vw;
     font-size: 7vw;
 }
 
@@ -87,13 +110,13 @@ h1 {
     
 }
 
-.modal-body {
-    height: 70vh;
-    overflow-y: auto;
+.leaflet-popup-content{
+    text-align: center;
 }
 
-#weather-body, #currency-body{
-    height: 50vh;
+.modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
 }
 
 
@@ -122,23 +145,26 @@ form > div {
 
     h1 {
         font-size: 2.5em;
-        left: 10%;
-        top: 1%;
+        left: 8%;
+        top: 10px;
     }
 
+    .form-select{
+        width: 50% !important;
+    }
    
     #sel1 {
         position: absolute;
         right: 3px;
         top: 10px;
-        width: 70%;
+        max-width: 300px ;
         height: 55% ;
         font-size: 1.5vw;
     }
     #logo {
         position: absolute;
         top: 5px;
-        left: 2%;
+        left: 10px;
         display: inline-block;
         height: 80%;
     
