@@ -1,6 +1,6 @@
 <?php
 
-$url= 'https://api.openweathermap.org/data/2.5/onecall?lat=' . $_REQUEST['lat'] . '&lon=' . $_REQUEST['lon'] . '&unit=metric&exclude=hourly,daily&appid=7bf0dbdfff8222d48bcdc89c0ae22daf';
+$url= 'api.openweathermap.org/data/2.5/onecall?lat=' . $_REQUEST['lat'] . '&lon=' . $_REQUEST['lon'] . '&unit=metric&appid=7bf0dbdfff8222d48bcdc89c0ae22daf';
 
 $handle = curl_init();
 curl_setopt($handle, CURLOPT_SSL_VERIFYPEER, false);
@@ -15,7 +15,7 @@ $decode = json_decode($result,true);
 
 $output['status']['code'] = "200";
 $output['status']['name'] = "ok";
-$output['data'] = $decode['current'];
+$output['data'] = $decode['daily'];
 
 header('Content-Type: application/json; charset=UTF-8');
 

@@ -190,29 +190,37 @@ getExchange = (results) => {
 };
 
 getWeather = (data) => {
+
     $.ajax({
         url: "../PHP/getWeather.php",
         type: 'POST',
-        dataType: 'json',
-        data: {
+        dataType: "json",
+        data:{
             lat: data[0].latlng[0],
             lon: data[0].latlng[1]
         },
         success: function(result) {
-        
-                 let weatherCode = result.data.weather[0].icon;
-                 let weatherDescription = result.data.weather[0].description;
-                 let weatherTemp = result.data.temp;
 
-                 document.getElementById('weatherImg').src = `http://openweathermap.org/img/wn/${weatherCode}@2x.png`;
-                 document.getElementById('weatherDesc').innerHTML = weatherDescription;
-                 document.getElementById('weatherTemp').innerHTML = `${Math.round(weatherTemp - 273.15)}°C`;
+            result.data.forEach(day => {
+
+                let d = day.dt*1000;
+                console.log(day.dt)
+                $("#weather-table").append(
+                `<tr>
+                    <th scope="row">${new Date(d).toLocaleDateString("en-GB")}</th>
+                    <td id="weatherMin">${Math.round(day.temp.min- 273.15)}°C</td>   
+                    <td id="weatherMax">${Math.round(day.temp.max- 273.15)}°C</td>  
+                    <td ><img  src="http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png"></td>    
+                    <td id="weatherDes">${day.weather[0].description}</td>                       
+                  </tr>`)
+            })
+
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(jqXHR, textStatus, errorThrown);
         }
     });
-}
+};
 
 // Get highest peak data from GitHub Pages
 getMountains = () => {
